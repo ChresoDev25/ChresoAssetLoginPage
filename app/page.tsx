@@ -24,11 +24,11 @@ export default async function Dashboard() {
   const userName = metadata?.full_name || metadata?.name || user.email || "User";
 
   return (
-    <div className="flex min-h-screen w-full overflow-hidden bg-[#0f172a]">
+    <div className="flex flex-col lg:flex-row min-h-screen w-full overflow-hidden bg-[#0f172a]">
       {/* Sidebar */}
-      <aside className="w-80 bg-[#5c67f2] flex flex-col items-center py-10 px-6 relative z-20 shadow-xl">
+      <aside className="w-full lg:w-80 bg-[#5c67f2] flex flex-col items-center py-6 px-4 lg:py-10 lg:px-6 relative z-20 shadow-xl shrink-0">
         {/* Logo Placeholder */}
-        <div className="w-40 h-32 bg-white rounded-2xl flex items-center justify-center shadow-lg mb-12 p-2 relative overflow-hidden">
+        <div className="w-24 h-20 lg:w-40 lg:h-32 bg-white rounded-2xl flex items-center justify-center shadow-lg mb-6 lg:mb-12 p-2 relative overflow-hidden">
           <Image
             src="/chreso-logo.png"
             alt="Chreso Logo"
@@ -38,8 +38,8 @@ export default async function Dashboard() {
           />
         </div>
 
-        {/* Mouse Graphic (Center) */}
-        <div className="flex-1 flex items-center justify-center w-full relative">
+        {/* Mouse Graphic (Center) - Hidden on Mobile to save space, or very small */}
+        <div className="hidden lg:flex flex-1 items-center justify-center w-full relative">
           {/* Stylized Mouse Wire/Icon */}
           <div className="relative">
             <MousePointer2
@@ -47,13 +47,12 @@ export default async function Dashboard() {
               className="text-white opacity-80 rotate-12"
               strokeWidth={1}
             />
-            {/* Decorative line/wire could be SVG, but keeping it simple with just the icon for now as per plan */}
           </div>
         </div>
 
         {/* User Profile */}
-        <div className="w-full bg-white rounded-xl py-4 px-6 mb-8 text-center shadow-md">
-          <span className="text-gray-900 font-bold uppercase tracking-wide truncate block">
+        <div className="w-full max-w-xs lg:max-w-none bg-white rounded-xl py-3 px-4 lg:py-4 lg:px-6 mb-6 lg:mb-8 text-center shadow-md">
+          <span className="text-gray-900 font-bold uppercase tracking-wide truncate block text-sm lg:text-base">
             {userName}
           </span>
         </div>
@@ -63,21 +62,21 @@ export default async function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 relative flex flex-col p-12">
+      <main className="flex-1 relative flex flex-col p-6 lg:p-12 overflow-y-auto">
         {/* Header */}
-        <header className="mb-20">
-          <h1 className="text-3xl tracking-wider text-white font-light text-opacity-90">
+        <header className="mb-10 lg:mb-20 text-center lg:text-left">
+          <h1 className="text-2xl lg:text-3xl tracking-wider text-white font-light text-opacity-90">
             CHRESO ASSET REGISTRY
           </h1>
         </header>
 
         {/* Action Buttons Area */}
-        <div className="flex flex-col gap-16 mt-10 z-10 w-full max-w-md ml-10">
+        <div className="flex flex-col gap-8 lg:gap-16 mt-0 lg:mt-10 z-10 w-full max-w-md mx-auto lg:ml-10">
           <a
             href="https://asset-reg.vercel.app/"
             className="group relative"
           >
-            <div className="bg-[#2d3780] hover:bg-[#384299] text-white text-xl py-6 px-12 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center border border-white/10 active:scale-95">
+            <div className="bg-[#2d3780] hover:bg-[#384299] text-white text-lg lg:text-xl py-4 px-8 lg:py-6 lg:px-12 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center border border-white/10 active:scale-95">
               <span>QR GENERATOR</span>
             </div>
           </a>
@@ -86,14 +85,14 @@ export default async function Dashboard() {
             href="https://asset-reg-scanner.vercel.app/"
             className="group relative"
           >
-            <div className="bg-[#2d3780] hover:bg-[#384299] text-white text-xl py-6 px-12 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center border border-white/10 active:scale-95">
+            <div className="bg-[#2d3780] hover:bg-[#384299] text-white text-lg lg:text-xl py-4 px-8 lg:py-6 lg:px-12 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center border border-white/10 active:scale-95">
               <span>QR ASSET SCANNER</span>
             </div>
           </a>
         </div>
 
-        {/* Background Illustrations */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Background Illustrations - Hidden on Mobile */}
+        <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
           {/* Monitor - Top Center-Right */}
           <div className="absolute top-[10%] right-[30%] opacity-90 text-white transform -rotate-12">
             <Monitor size={220} strokeWidth={1.5} />
@@ -135,6 +134,16 @@ export default async function Dashboard() {
           </div>
 
           {/* Stylized wire for keyboard/mouse could be SVG paths, using simple positioning for "sketch" feel */}
+        </div>
+
+        {/* Mobile Footer (Visible only on small screens) */}
+        <div className="lg:hidden mt-auto pt-10 pb-4 text-center z-10">
+          <p className="text-white/80 text-sm italic tracking-widest font-semibold">
+            &ldquo; Chreso Asset Registry System &rdquo;
+          </p>
+          <span className="text-white/60 text-xs normal-case not-italic mt-1 block">
+            © DeZignBlu-Print ZM: 2026
+          </span>
         </div>
       </main>
     </div>
